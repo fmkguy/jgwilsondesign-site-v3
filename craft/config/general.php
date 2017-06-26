@@ -31,6 +31,6 @@ return array(
 	'cpTrigger' => 'admin',
 
 	// Dev Mode (see https://craftcms.com/support/dev-mode)
-	'devMode' => true,
+	// 'devMode' => true,
 
 );
