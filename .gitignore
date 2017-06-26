@@ -75,9 +75,9 @@ $RECYCLE.BIN/
 *.lnk
 
 # Project-specific
-craft/app/
+craft/app
 craft/config/license.key
 craft/config/db.php
-html/assets/site/
+html/assets/site
 *.sql
 *.sql*
