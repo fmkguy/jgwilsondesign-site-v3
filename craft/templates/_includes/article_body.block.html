@@ -1,0 +1,141 @@
+{#
+ # articleBody Block
+ # -----------------
+ #
+ # 
+ #}
+
+{% macro getNextBlockAttr(block, attr) %}
+	{%- spaceless %}
+		{{ block[ attr ] ? block[ attr ] }}
+	{% endspaceless -%}
+{% endmacro %}
+
+{% macro getNextImageAttr(block, attr) %}
+    {%- spaceless %}
+        {% if block.type.handle == 'image' %}
+		    {{ block[ attr ] ? block[ attr ] }}
+        {% endif %}
+	{% endspaceless -%}
+{% endmacro %}
+
+{% from _self import getNextBlockAttr %}
+{% from _self import getNextImageAttr %}
+
+{% set nextType = null %}
+{% set prevType = null %}
+{% set isNextBlockNewSection = null %}
+{% set getNextImageLayout = null %}
+{% set getNextImageCount = null %}
+{% set imageCount = null %}
+{% set closedPrevBlock = true %}
+{% set blocks = entry.articleBody %}
+
+{% for i, block in blocks %}
+
+    {% set type = (nextType ?: block.type.handle) %}
+    {% set nextType = (not loop.last ? blocks[i+1].type.handle) %}
+    {% set isNextBlockNewSection = (not loop.last ? getNextBlockAttr(blocks[i+1], 'isNewSection')) %}
+    {% set getNextImageLayout = (not loop.last and getNextImageAttr(blocks[i+1], 'layout') ? getNextImageAttr(blocks[i+1], 'layout') : false) %}
+
+    {% if type == 'image' %}
+        {% set imageCount = block.image | length %}
+        {% set gridCountClass = ['', 'grid--two-columns', 'grid--three-columns'] %}
+    {% endif %}
+
+    {% switch block.isNewSection %}
+        {% case 'none' %}
+            {% set newSectionClass = '' %}
+
+        {% case 'newSection' %}
+            {% set newSectionClass = ' layout-section' %}
+
+        {% case 'newSectionTopMarginOnly' %}
+            {% set newSectionClass = ' layout-section layout-section--top' %}
+        
+        {% case 'newSectionBottomMarginOnly' %}
+            {% set newSectionClass = ' layout-section layout-section--bottom' %}
+    {% endswitch %}
+
+    {% set needsNewBlock = (
+        (nextType == 'testimonial') or
+        (isNextBlockNewSection != 'none') or
+        (type == 'image' and imageCount > 1) or
+        (type == 'image' and block.layout != 'block') or
+        (getNextImageLayout and getNextImageLayout != 'block')
+    ) %}
+
+
+    {% if type == 'testimonial' %}
+        {# First loop through all testimonials in current block #}
+        {% for testimonialEntry in block.testimony %}
+
+        {# Then loop through the actual fields in each testimonial! #}
+        {% for quote in testimonialEntry.testimonial %}
+        <blockquote class="blockquote">
+            <div class="blockquote__quote">{{ quote.quote }}</div>
+            <footer class="blockquote__attribution">
+                <strong class="blockquote__author">&mdash;&thinsp;{{ quote.cite }},</strong>{% if quote.role %}<span class="blockquote__author-role"> {{ quote.role }}</span>{% endif %}
+            </footer>
+        </blockquote>
+        {% endfor %}
+        {% endfor %}
+    {% endif %}
+
+    
+    {% if type == 'image' and imageCount > 1 %}    
+        <div class="grid {{ gridCountClass[imageCount-1] }} layout-block{% if block.layout != 'block' %} layout-block--{{ block.layout }}{% endif %}{{ newSectionClass }}">
+    {% elseif type == 'image' and imageCount == 1 %}
+        <figure class="figure{% if closedPrevBlock or block.isNewSection != 'none' %} layout-block{% if block.layout != 'block' %} layout-block--{{ block.layout }}{% endif %}{{ newSectionClass }}{% endif %}">
+    {% elseif type in ['text', 'iconList'] and closedPrevBlock %}
+        <div class="layout-block{{ newSectionClass }}">
+    {% endif %}
+
+
+    {% if type == 'text' %}
+        {{ block.text }}
+    {% endif %}
+
+
+    {% if type == 'iconList' %}
+        <div class="skill-set-list grid">
+        {% for iconEntry in block.icon %}
+            <div class="skill-set-list__item">
+                {% set iconImg = iconEntry.icon.first() %}
+                <img class="skill-set-list__icon helper--vertical-align" src="{{ iconImg.url }}" alt="{{ iconEntry.title }}" />
+            </div>
+        {% endfor %}
+        </div>
+    {% endif %}
+
+
+    {% if type == 'image' %}
+        {% for image in block.image %}
+            {% if imageCount > 1 %}
+            <figure class="figure grid__cell">
+            {% endif %}
+                <img class="figure__image" src="{{ image.url }}" alt="{{ image.title }}" />
+                {% if image.imageCaption %}
+                <figcaption class="figure__caption">{{ image.imageCaption }}</figcaption>
+                {% endif %}
+            {% if imageCount > 1 %}
+            </figure>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+
+
+    {% if type == 'image' and imageCount == 1 %}
+        </figure>
+        {% set closedPrevBlock = true %}
+    {% endif %}
+
+    {% if needsNewBlock %}
+        </div>
+        {% set closedPrevBlock = true %}
+    {% else %}
+        {% set closedPrevBlock = false %}
+    {% endif %}
+
+    {% set prevType = type %}
+{% endfor %}

@@ -1,0 +1,75 @@
+{#
+ # Work template
+ # -------------
+ #
+ # For 'illustration' and 'web-development' Single entries.
+ # 
+ #}
+
+{% extends "_layouts/base" %}
+{% set title = entry.title %}
+
+{% set bodyClass = "work work--index" %}
+
+{% block content %}
+
+    <header class="header layout-block">
+        <h1 class="header__heading heading heading--alpha">{{ entry.title }}</h1>
+        <div class="header__subheading">{{ entry.subheading }}</div>
+    </header>
+
+    {#-- P R O J E C T  L I N K S --#}
+    {% set projectLinks = entry.slug == 'web-development-index' ? entry.webDevelopmentProjects : entry.illustrationProjects %}
+    {% set projectLinksLength = projectLinks | length %}
+    {% if projectLinks and projectLinksLength > 0 %}
+    <div class="project-links grid layout-block layout-block--full">
+        {% for project in projectLinks %}
+            {% include "_includes/project_link.block" with { project: project } %}
+        {% endfor %}
+        {% if projectLinksLength % 2 != 0 %}
+        <div class="project-links__link project-links__link--empty grid__cell">
+            <p class="">Your project could be next!</p>
+        </div>
+        {% endif %}
+    </div>
+    {% endif %}
+
+    {% include "_includes/article_body.block" %}
+
+    {#-- G A L L E R Y --#}
+    {% for gallery in entry.gallery %}
+    <div class="layout-block layout-block--full layout-block--color-light">
+        <div class="gallery layout-block layout-block--wide layout-block--inner">
+            <h2 class="gallery__heading heading heading--beta">{{ gallery.heading }}</h2>
+            <div class="gallery__grid grid grid--three-columns">
+                {% for galleryItem in gallery.image %}
+                {% do galleryItem.setTransform({ width: 342, height: 256 }) %}
+                <div class="gallery__item grid__cell">
+                    <img src="{{ galleryItem.url }}" alt="{{ galleryItem.title }}" />
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+    {% if entry.instagram and (entry.instagram | length) and entry.instagram.first().showInstagramBlock %}
+        {#-- I N S T A G R A M --#}
+        {% for instagramFeed in entry.instagram %}
+            {% include "_includes/instagram.block" with { heading: instagramFeed.heading } %}
+        {% endfor %}
+    {% endif %}
+
+    {#-- F O O T N O T E S --#}
+    {% if entry.footnotes %}
+    <div class="footnotes layout-block layout-block--wide">
+        {% for footnote in entry.footnotes %}
+        <div id="footnotes-{{ footnote.footnoteId }}">
+            {{ footnote.footnoteText }}
+            <br />
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+{% endblock %}

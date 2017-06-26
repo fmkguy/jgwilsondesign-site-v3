@@ -1,0 +1,78 @@
+{#
+ # Homepage template
+ # -----------------
+ #
+ # 
+ #}
+
+{% extends "_layouts/base" %}
+{% set bodyClass = "home" %}
+
+{% block content %}
+
+	<header class="hero layout-block layout-block--wide">
+		<div class="helper--vertical-align">
+			<h1 class="hero__heading heading heading--hero">{{ entry.title }}</h1>
+			<div class="hero__subheading">{{ entry.subheading }}</div>
+		</div>
+		<div class="hero__scroll-notice">
+			<span class="hero__scroll-notice-icon"></span> Scroll
+		</div>
+	</header>
+
+	<div class="project-links grid layout-block layout-block--full">
+		<a href="{{ url('web') }}" class="project-links__link project-links__web-link grid__cell">
+			<span class="project-links__inner-wrap">
+				<span class="helper--vertical-align">
+					<span class="project-links__image-wrap">
+						<img class="project-links__image" src="{{ siteUrl }}assets/img/bg_webdev.png" alt="Computer and laptop" />
+						<img class="project-links__hover-image" src="{{ siteUrl }}assets/img/bg_webdev-hover.png" alt="Hover sparkles!" />
+					</span>
+					<span class="project-links__content">View my web development work.</span>
+				</span>
+			</span>
+			<img class="project-links__background-image" src="{{ craft.config.environmentVariables.assetsBaseUrl }}/img/bg_web-development-link.jpg" alt="Web Development" />
+		</a>
+		<a href="{{ url('art') }}" class="project-links__link project-links__art-link grid__cell">
+			<span class="project-links__inner-wrap">
+				<span class="project-links__content helper--vertical-align">Browse my illustration projects.</span>
+			</span>
+			<img class="project-links__background-image" src="{{ craft.config.environmentVariables.assetsBaseUrl }}/img/bg_illustration-link.jpg" alt="Illustration" />
+		</a>
+	</div>
+
+	{#-- T E S T I M O N I A L S --#}
+	<div class="layout-block layout-block--full layout-block--color-light">
+		<div class="testimonials owl-carousel layout-block layout-block--wide">
+		{% for testimonyEntry in craft.entries.section('testimonials') %}
+		{% for block in testimonyEntry.testimonial %}
+			<div class="testimonial layout-block">
+				<div class="testimonial__quote">
+					{{ block.quote }}
+				</div>
+				<div class="testimonial__attribution">
+				{% set photo = block.avatar.first() %}
+				{% if photo %}
+					<img class="testimonial__avatar" src="{{ photo.url({ width: 62, height: 62 }) }}" alt="{{ block.cite }}" />
+				{% endif %}
+					<span class="testimonial__author">
+						<strong class="testimonial__author-name">{{ block.cite }}</strong>
+						{% if block.role %}{{ block.role }}, {% endif %}<em>{{ block.company }}</em>
+					</span>
+				</div>
+			</div>
+		{% endfor %}
+		{% endfor %}
+		</div>
+	</div>
+
+	{% include "_includes/article_body.block" %}
+
+	{% if entry.instagram and (entry.instagram | length) and entry.instagram.first().showInstagramBlock %}
+        {#-- I N S T A G R A M --#}
+        {% for instagramFeed in entry.instagram %}
+            {% include "_includes/instagram.block" with { heading: instagramFeed.heading } %}
+        {% endfor %}
+    {% endif %}
+
+{% endblock %}

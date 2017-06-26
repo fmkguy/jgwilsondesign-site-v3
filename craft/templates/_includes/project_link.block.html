@@ -1,0 +1,24 @@
+{#
+ #
+ #}
+{% if project is defined %}
+<a href="{{ project.url }}" class="project-links__link grid__cell">
+    <span class="project-links__inner-wrap">
+        {% for projectDetails in project.projectDetails %}
+        <span class="project-links__content">
+            <span class="project-links__project-name">{{ projectDetails.clientName }}</span>
+            <span class="project-links__project-services">
+                {%- for service in projectDetails.services %}
+                {{ service.label }}{% if not loop.last %}, {% endif %}
+                {% endfor -%}
+            </span>
+        </span>
+        {% endfor %}
+    </span>
+    {% set thumbnail = project.projectThumbnail.first() %}
+    {% do thumbnail.setTransform({ width: 768, height: 408 }) %}
+    {% if thumbnail %}
+    <img src="{{ thumbnail.url }}" alt="{{ project.title }}" />
+    {% endif %}
+</a>
+{% endif %}

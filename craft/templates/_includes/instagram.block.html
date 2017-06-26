@@ -1,0 +1,27 @@
+{#
+ # BLOCK: INSTAGRAM
+ # =========================
+ # 
+ # Outputs a gallery block with the Instagram feed.
+ # Displays 10 most recent posts.
+ # 
+ #}
+
+{% if craft.instagramfeed.isConnected() %}
+<div class="layout-block layout-block--full layout-block--color-dark">
+    <div class="gallery layout-block layout-block--wide layout-block--inner">
+        {% if heading is defined %}
+        <h2 class="gallery__heading heading heading--beta">{{ heading }}</h2>
+        {% endif %}
+        <div class="grid gallery__grid">
+        {% for image in craft.instagramfeed.getFeed(10) %}
+            <div class="gallery__item grid__cell">
+                <a href="{{ image.link }}" target="_blank" class="gallery__link">
+                    <img class="gallery__image" src="{{ image.url }}" alt="{{ image.link }}" width="196" height="196" />
+                </a>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+</div>
+{% endif %}

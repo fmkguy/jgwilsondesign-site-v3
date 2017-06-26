@@ -1,0 +1,12 @@
+{
+  "name": "jgwilsondesign-site-v3",
+  "version": "1.0.0",
+  "description": "Current version of my personal website (built on Craft CMS).",
+  "author": "Joseph Wilson",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.1",
+    "gulp-sass": "^3.1.0",
+    "gulp-rename": "^1.2.2"
+  }
+}

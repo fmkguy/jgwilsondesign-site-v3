@@ -1,0 +1,105 @@
+{#
+ # About template
+ # --------------
+ #
+ # 
+ #}
+
+{% extends "_layouts/base" %}
+{% set title = entry.title %}
+{% set bodyClass = "about" %}
+
+{% block content %}
+
+    <header class="header">
+        <div class="layout-block">
+            <h1 class="header__heading heading heading--alpha">{{ entry.title }}</h1>
+        </div>
+        {% set hero = entry.heroImage.first() %}
+        {% if hero %}
+        <div class="header__image layout-block layout-block--full">
+            <img src="{{ hero.url() }}" alt="{{ entry.title }}" />
+        </div>
+        {% endif %}
+    </header>
+    
+    <div class="layout-block">
+        <div class="first-paragraph">{{ entry.body }}</div>
+    </div>
+
+    {#-- T R I V I A --#}
+    {% if entry.aboutTrivia.length %}
+    <div class="about-trivia layout-block">
+    {% for i, trivia in entry.aboutTrivia %}
+        {% set isFlowRight = (i) is odd ? true : false %}
+        {% set triviaImage = trivia.triviaImage.first() %}
+        <div class="about-trivia__item grid{% if isFlowRight %} grid--flow-right{% endif %}">
+            {% if isFlowRight == false %}
+            <div class="about-trivia__image grid__cell grid__cell--one-third">
+                {% if triviaImage %}
+                <img src="{{ triviaImage.url() }}" alt="{{ trivia.triviaHeading }}" />
+                {% endif %}
+            </div>
+            {% endif %}
+            <div class="about-trivia__content grid__cell grid__cell--flex">
+                <h3 class="heading heading--delta">{{ trivia.triviaHeading }}</h3>
+                {{ trivia.triviaBody }}
+            </div>
+            {% if isFlowRight %}
+            <div class="about-trivia__image grid__cell grid__cell--one-third">
+                {% if triviaImage %}
+                <img src="{{ triviaImage.url() }}" alt="{{ trivia.triviaHeading }}" />
+                {% endif %}
+            </div>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    {% include "_includes/article_body.block" %}
+
+    {#-- S K I L L  L I S T --#}
+    {% if entry.aboutSkills.length %}
+    <div class="layout-block layout-block--full layout-block--color-light">
+        <div class="about-skills layout-block layout-block--wide layout-block--inner">
+            {#-- <h2 class="about-skills__heading heading heading--beta">Areas of Expertise</h2> --#}
+            {% set columnClass = '' %}
+            {% if (entry.aboutSkills | length == 2) %}
+                {% set columnClass = ' grid--two-columns' %}
+            {% elseif (entry.aboutSkills | length == 3) %}
+                {% set columnClass = ' grid--three-columns' %}
+            {% endif %}
+            <div class="about-skills__grid grid{{ columnClass }}">
+                {% for skillList in entry.aboutSkills %}
+                <div class="about-skills__cell grid__cell">
+                    <h3 class="about-skills__subheading heading heading--gamma">{{ skillList.skillListTitle }}</h3>
+                    <ul class="about-skills__list">
+                        {% for skill in skillList.skills %}
+                        <li class="about-skills__item">
+                            {% set icon = skill.icon.first() %}
+                            {% if icon %}
+                            <span class="about-skills__icon">
+                                <img class="helper--vertical-align" src="{{ icon.url }}" alt="{{ skill.title }}" />
+                            </span>
+                            {% endif %}
+                            <span class="about-skills__label">{{ skill.body }}</span>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <div class="layout-block layout-block--full layout-block--color-dark">
+        <div class="layout-block layout-block--inner">
+            <div class="first-paragraph">
+                {{ entry.aboutClincher }}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

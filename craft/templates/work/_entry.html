@@ -1,0 +1,68 @@
+{#
+ # Project template
+ # ----------------
+ #
+ # 
+ #}
+
+{% extends "_layouts/base" %}
+{% set title = entry.title %}
+
+{% set bodyClass = "work work--project" %}
+
+{% block content %}
+
+    <header class="header">
+        <div class="header__image layout-block layout-block--full">
+            {% set hero = entry.heroImage.first() %}
+            {% if hero %}
+            <img src="{{ hero.url }}" alt="{{ entry.title }}" />
+            {% endif %}
+        </div>
+    </header>
+    
+    {% for details in entry.projectDetails %}
+    <div class="project-details grid layout-block">
+        <div class="project-details__metadata grid__cell grid__cell--one-third">
+            <div class="project-details__client">
+                {% set logo = details.clientLogo.first() %}
+                {% if logo %}
+                <img class="project-details__client-logo" src="{{ logo.url }}" alt="{{ details.clientName }} Logo">
+                {% else %}
+                <h2 class="project-details__client-name">{{ details.clientName }}</h2>
+                {% endif %}
+            </div>
+            {% if details.websiteUrl %}
+            <a href="{{ details.websiteUrl }}" target="_blank" class="project-details__website">Visit Website</a>
+            {% endif %}
+            {% if details.services %}
+            <h4 class="project-details__services-heading">Services</h4>
+            <ul class="project-details__services">
+                {% for services in details.services %}
+                <li>{{ services.label }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+        <div class="project-details__description grid__cell grid__cell--flex">
+            {{ details.shortDescription }}
+        </div>
+    </div>
+    {% endfor %}
+    
+    <hr class="divider" />
+
+    {% include "_includes/article_body.block" %}
+
+    <div class="project-links project-links--more-projects grid grid--two-columns-no-margin layout-block layout-block--full">
+        <h2 class="project-links--more-projects__heading heading heading--beta">Other Projects</h2>
+        {% set projectLinks = {
+            prev: entry.prevSibling() ? entry.prevSibling() : entry.siblings().last(),
+            next: entry.nextSibling() ? entry.nextSibling() : entry.siblings().first()
+        } %}
+        {% for project in projectLinks %}
+            {% include "_includes/project_link.block" with { project: project } %}
+        {% endfor %}
+    </div>
+
+{% endblock %}

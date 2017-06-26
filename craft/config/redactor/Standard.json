@@ -1,0 +1,7 @@
+{
+	"buttons": ["format","bold","italic","lists","link","file","horizontalrule"],
+	"plugins": ["source","fullscreen"],
+	"callbacks": {
+		"beforeInsertingLink": "function(link) { link.url = link.url.replace(/^#/i, ''); return link; }"
+	}
+}

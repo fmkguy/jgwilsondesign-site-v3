@@ -1,0 +1,124 @@
+// A B O U T  C O N T E N T
+// ====================================================
+.about .first-paragraph p {
+  margin: 0;
+}
+
+.about-trivia {
+  @include layout__new-section--margin-top-only;
+
+  &__item {
+    align-items: center;
+    display: flex;
+    margin: emify(48, 20) 0;
+    @at-root .grid--flow-right #{&} .grid__cell--one-third {
+      order: 2
+    }
+
+    &:first-of-type {
+      margin-top: 0;
+    }
+
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+
+    @media screen and (max-width: #{$mq--small}px) {
+      flex-direction: column;
+
+      &.grid--flow-right {
+        flex-direction: column-reverse;
+      }
+    }
+  }
+
+  &__image {
+    @media screen and (max-width: #{$mq--small}px) {
+      margin: emify(48, $text__font-size--max) 0;
+    }
+
+    @media screen and (min-width: #{$mq--small + 1}px) {
+      align-items: center;
+      display: flex;
+      height: emify(256, $text__font-size--max);
+    }
+
+    img {
+      margin: 0 auto;
+    }
+  }
+
+  &__image,
+  &__content {
+    float: none;
+
+    @media screen and (min-width: #{$mq--small + 1}px) {
+      margin-bottom: 0;
+    }
+  }
+
+  &__content {
+    font-family: $text__font-family--sans-serif;
+    @include text__font-size($text__font-size, $text__font-size--max, 24);
+
+    & .heading {
+      border: none;
+      color: $color--gray-dark;
+      font-family: $text__font-family--sans-serif;
+      @include text__font-size($text__font-size, $text__font-size, 24);
+      margin: 0;
+    }
+
+    & p {
+      margin: 0;
+    }
+  }
+}
+
+.about-skills {
+  &__cell {
+    @media screen and (max-width: #{$mq--small}px) {
+      width: 100%;
+    }
+  }
+
+  &__list {
+    list-style: none;
+    margin-bottom: 0;
+
+    @media screen and (max-width: #{$mq--small}px) {
+      margin-bottom: emify(48, $text__font-size--max);
+    }
+  }
+
+  &__item {
+    font-family: $text__font-family--sans-serif;
+    font-size: emify($text__font-size, $text__font-size--max);
+    line-height: emify($text__font-size--max, $text__font-size);
+    margin-bottom: 1em;
+    position: relative;
+
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+
+  &__icon {
+    display: block;
+    height: emify(36, $text__font-size);
+    position: absolute;
+    width: emify(36, $text__font-size);
+  }
+  &__label {
+    display: block;
+    // line-height: emify(24, 16);
+    min-height: emify(36, $text__font-size);
+    padding-left: emify(52, $text__font-size);
+
+    & p {
+      margin: 0;
+      padding-top: emify(8, $text__font-size);
+    }
+  }
+}
+// --- end About content

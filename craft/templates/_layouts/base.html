@@ -1,0 +1,133 @@
+{#
+ # 
+ # 
+ #}
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+{% block head %}
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>{% if title is defined %}{{ title }} &mdash; {{ siteName }}{% else %}I'm Wilson: Portland, Oregon-based front-end developer and artist.{% endif %}</title>
+
+    <link rel="icon" type="image/x-icon" href="{{ siteUrl }}assets/img/favicon.ico" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Passion+One:700" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700" />
+    <link rel="stylesheet" type="text/css" href="{{ siteUrl }}assets/css/owl.carousel.min.css" />
+    <link rel="stylesheet" type="text/css" href="{{ siteUrl }}assets/css/owl.theme.default.min.css" />
+	<link rel="stylesheet" type="text/css" href="{{ siteUrl }}assets/css/style.min.css" />
+
+    <!-- S O C I A L -->
+    <link rel="author" href="https://twitter.com/fmkguy" />
+    <link rel="canonical" href="{{ craft.request.getUrl() }}" />
+	<meta property="og:type" content="website" />
+    <meta property="og:url" content="{{ craft.request.getUrl() }}" />
+    <meta property="og:site_name" content="jgwilsondesign" />
+	<meta name="twitter:site" content="@fmkguy" />
+    <meta name="twitter:domain" content="jgwilsondesign.com" />
+	{% set socialTitle = entry.socialTitle ?: entry.title %}
+    <meta property="og:title" content="{{ socialTitle }}" />
+	<meta name="twitter:title" content="{{ socialTitle }}" />
+{% if entry.socialDescription %}
+	<meta name="description"  content="{{ entry.socialDescription }}" />
+    <meta property="og:description" content="{{ entry.socialDescription }}" />
+	<meta name="twitter:description" content="{{ entry.socialDescription }}" />
+{% endif %}
+{% set socialImg = entry.socialImage.first() %}
+{% if socialImg %}
+	<meta property="og:image" content="{{ socialImg.url() }}" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:image" content="{{ socialImg.url() }}" />
+	<meta name="twitter:card" content="summary_large_image" />
+    <meta itemprop="image" content="{{ socialImg.url() }}" />
+{% endif %}
+{% endblock %}
+</head>
+
+<body{% if bodyClass is defined%} class="{{ bodyClass }}"{% endif %}>
+
+	<header class="layout-header">
+        <div class="layout-block layout-block--full">
+            <div class="logo">
+                <a href="/" class="logo__link">
+                    <picture class="logo__image">
+                    <!--[if IE 9]><video style="display:none"><![endif]-->
+                        <source type="image/svg+xml" srcset="{{ siteUrl }}assets/img/logo.svg">
+                    <!--[if IE 9]></video><![endif]-->
+                        <img src="{{ siteUrl }}assets/img/logo.png" srcset="{{ siteUrl }}assets/img/logo@2x.png 2x" alt="JGW" />
+                    </picture>
+                    <span class="logo__tagline">I&rsquo;m Wilson.</span>
+                </a>
+            </div>
+            <a href="#" class="menu__trigger"><span class="menu__trigger-icon">Menu</span></a>
+            <nav class="menu">
+                <a href="#" class="menu__trigger"><span class="menu__trigger-icon">Close</span></a>
+                <a href="{{ url('web') }}" class="menu__link">Web Development</a>
+                <a href="{{ url('art') }}" class="menu__link">Illustration</a>
+                {# <a href="#" class="menu__link menu__link--has-dropdown">Work +</a> #}
+                <a href="{{ url('about') }}" class="menu__link">About Me</a>
+            </nav>
+        </div>
+        {# This will maybe get used later. Maybe. #}
+        {#
+        <div class="menu__submenu-container">
+            <div class="layout-block layout-block--full">
+                <nav class="menu__submenu">
+                    <a href="{{ url('web') }}" class="menu__submenu-link"><span class="menu__item-icon"></span>Web Development</a>
+                    <a href="{{ url('illustration') }}" class="menu__submenu-link"><span class="menu__item-icon"></span>Illustration</a>
+                </nav>
+            </div>
+        </div>
+        #}
+    </header>
+<!-- end layout-header -->
+
+    <main>
+        <section class="layout-content" role="document">
+    	    {% block content %}{% endblock %}
+        </section>
+<!-- end layout-content -->
+    </main>
+
+	<footer class="layout-footer">
+        <div class="contact layout-block">
+
+            {{ footer.footerContent }}
+            
+            <div class="contact-methods grid grid--two-columns">
+                <a href="https://www.linkedin.com/in/joseph-wilson-aa97bba" target="_blank" class="btn contact-methods__btn grid__cell">
+                    <span class="contact-methods__icon"></span>
+                    <span class="contact-methods__label">View my LinkedIn profile.</span>
+                </a>
+                <a href="http://jgwilsondesign.com/resume.pdf" target="_blank" class="btn contact-methods__btn grid__cell">
+                    <span class="contact-methods__icon"></span>
+                    <span class="contact-methods__label">Download my resume.</span>
+                </a>
+            </div>
+        </div>
+            
+        <div class="footer-social-links">
+            <a href="https://www.instagram.com/fmkguy/" target="_blank" class="footer-social-links__link"><span class="footer-social-links__icon footer-social-links__icon--instagram">Instagram</span></a>
+            <a href="https://twitter.com/fmkguy" target="_blank" class="footer-social-links__link"><span class="footer-social-links__icon footer-social-links__icon--twitter">Twitter</span></a>
+            <a href="https://dribbble.com/fmkguy" target="_blank" class="footer-social-links__link"><span class="footer-social-links__icon footer-social-links__icon--dribbble">Dribble</span></a>
+            <a href="https://github.com/fmkguy" target="_blank" class="footer-social-links__link"><span class="footer-social-links__icon footer-social-links__icon--github">Github</span></a>
+            <a href="http://codepen.io/fmkguy/" target="_blank" class="footer-social-links__link"><span class="footer-social-links__icon footer-social-links__icon--codepen">Codepen</span></a>
+        </div>
+        
+        <div class="footer-copyright">
+            <div class="footer-copyright__info">Copyright &copy; 2007&ndash;{{ now.year }} Joseph Wilson</div>
+            <div class="footer-copyright__made-in">Made in Portland, OR</div>
+        </div>
+    </footer>
+<!-- end layout-footer -->
+
+    <script type="text/javascript" src="{{ siteUrl }}assets/js/jquery-3.2.1.slim.min.js"></script>
+    <script type="text/javascript" src="{{ siteUrl }}assets/js/owl.carousel.min.js"></script>
+    <script type="text/javascript" src="{{ siteUrl }}assets/js/site.js"></script>
+
+</body>
+</html>
