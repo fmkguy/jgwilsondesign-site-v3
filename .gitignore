@@ -81,3 +81,7 @@ craft/config/db.php
 html/assets/site
 *.sql
 *.sql*
+
+# PRODUCTION
+src/
+gulpfile.js
