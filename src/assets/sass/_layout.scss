@@ -1,0 +1,157 @@
+
+// L A Y O U T
+// ====================================================
+.layout-section {
+  @include layout__new-section;
+
+  &--top {
+    margin-bottom: 0;
+  }
+
+  &--bottom {
+    margin-top: 0;
+  }
+
+  & > p:last-of-type:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.layout-block {
+  @include layout__block;
+}
+
+.layout-block--wide {
+  max-width: calc(#{$width--wide} + 2em);
+}
+
+.layout-block--full {
+  max-width: #{$width--full};
+  padding: 0;
+}
+
+.layout-block--color-light {
+  background-color: $color--gray-light;
+}
+
+.layout-block--color-dark {
+  background-color: $color--gray-dark;
+  color: $color--white;
+}
+
+.layout-block--inner {
+  padding-bottom: emify(120, $text__font-size--max);
+  padding-top: emify(104, $text__font-size--max);
+  & > p:last-of-type {
+    margin-bottom: 0;
+  }
+}
+
+.layout-header {
+  margin-bottom: emify(80, $text__font-size--max);
+  margin-top: emify(32, $text__font-size--max);
+  @include clearfix;
+  position: relative;
+  text-align: left;
+  z-index: 10;
+}
+
+.layout-content {
+  @include clearfix;
+  position: relative;
+  text-align: left;
+  z-index: 0;
+}
+
+.layout-footer {
+  @include layout__new-section--margin-top-only;
+  text-align: left;
+}
+
+
+// G R I D  S Y S T E M
+@mixin grid__cell($column-count, $desired-gutter-width: emify(36, $text__font-size--max), $desired-column-width: calc((100% - (#{$desired-gutter-width} * (#{$column-count} - 1))) / #{$column-count})) {
+  @if $desired-gutter-width==0 {
+    $desired-column-width: calc(100% / #{$column-count});
+  }
+  margin-right: $desired-gutter-width;
+  width: $desired-column-width;
+  @at-root #{&}:nth-child(#{$column-count}n) {
+    margin-right: 0;
+  }
+}
+
+.grid {
+  @include clearfix;
+  &__cell {
+    float: left;
+
+    @at-root .grid--two-columns #{&} {
+      @media screen and (min-width: #{$mq--small + 1}px) {
+        @include grid__cell(2, emify(40, $text__font-size--max));
+      }
+    }
+
+    @at-root .grid--two-columns-no-margin #{&} {
+      @media screen and (min-width: #{$mq--small + 1}px) {
+        @include grid__cell(2, 0);
+      }
+    }
+
+    @at-root .grid--three-columns #{&} {
+      @media screen and (min-width: #{$mq--small + 1}px) {
+        @include grid__cell(3);
+      }
+    }
+
+    @at-root .grid--four-columns #{&} {
+      @media screen and (min-width: #{$mq--small + 1}px) {
+        @include grid__cell(4);
+      }
+    }
+
+    @at-root .grid--five-columns #{&} {
+      @media screen and (min-width: #{$mq--small + 1}px) {
+        margin-bottom: emify(40, 20);
+        @include grid__cell(5, emify(30, $text__font-size--max));
+      }
+    }
+
+    &--one-third {
+      @include grid__cell(3, emify(36, $text__font-size--max), calc((#{$width--wide} - (#{emify(36, $text__font-size--max)} * (3 - 1))) / 3));
+      margin-left: -166px;
+      margin-right: emify(36, $text__font-size--max);
+      text-align: center;
+
+      @media screen and (max-width: #{$mq--medium}px) {
+        @include grid__cell(3, emify(36, $text__font-size--max), calc((#{$width--main} - (#{emify(36, $text__font-size--max)} * (3 - 1))) / 3));
+        margin-left: 0;
+      }
+
+      @media screen and (max-width: #{$mq--small}px) {
+        @include grid__cell(1, 0);
+      }
+
+      @at-root .grid--flow-right #{&} {
+        margin-left: emify(36, $text__font-size--max);
+        margin-right: -166px;
+
+        @media screen and (max-width: #{$mq--medium}px) {
+          margin-right: 0;
+        }
+
+        @media screen and (max-width: #{$mq--small}px) {
+          margin-left: 0;
+        }
+      }
+    }
+
+    &--flex {
+      @media screen and (min-width: #{$mq--small + 1}px) {
+        @include grid__cell(1, null, 555px);
+      }
+    }
+  }
+}
+// --- end grid system
+// --- end layout

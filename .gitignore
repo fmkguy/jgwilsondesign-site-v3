@@ -79,6 +79,7 @@ craft/app
 craft/config/license.key
 craft/config/db.php
 html/assets/site
+src/*.html
 *.sql
 *.sql*
 
