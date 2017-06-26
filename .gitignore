@@ -85,3 +85,5 @@ html/assets/site
 # PRODUCTION
 src/
 gulpfile.js
+package.json
+yarn.lock
