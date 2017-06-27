@@ -24,7 +24,7 @@ $width--wide: ($text__font-size * 68.75) * 1px; // 1100px
 $width--full: ($text__font-size * 96) * 1px; // 1536px
 
 // media queries (VALUES ONLY -- no "px")
-$mq--small: $text__font-size * 31.25; // 500px
+$mq--small: $text__font-size * 40; // 640px
 $mq--medium: $text__font-size * 68.75; // 1100px
 $mq--large: $text__font-size * 96; // 1536px
 
@@ -110,6 +110,16 @@ $assets-url: "../img/";
   font-family: $text__font-family--heading;
   font-weight: 700;
   text-transform: uppercase;
+}
+
+@mixin sprite($posX: 0, $posY: 0) {
+  background: url(#{$assets-url}icns_sprite.png) no-repeat $posX $posY;
+  background-size: 286px 64px;
+
+  @media only screen and (-webkit-min-device-pixel-ratio: 2), 
+  only screen and (min-device-pixel-ratio: 2) {
+    background-image: url(#{$assets-url}icns_sprite@2x.png);
+  }
 }
 // --- end mixins
 
@@ -216,6 +226,13 @@ article, aside, footer, header, main, nav, section {
     position: relative;
     vertical-align: middle;
     width: emify(80, $text__font-size--max);
+
+    @media screen and (max-width: #{$width--main}) {
+      float: left;
+      height: 32px;
+      vertical-align: initial;
+      width: 32px;
+    }
   }
 
   &__tagline {
@@ -226,6 +243,10 @@ article, aside, footer, header, main, nav, section {
 
     @at-root .home & {
       display: none;
+    }
+
+    @media screen and (max-width: #{$width--main}) {
+      line-height: 32px;
     }
   }
 }
@@ -247,7 +268,7 @@ article, aside, footer, header, main, nav, section {
     margin-right: 1rem;
 
     &-icon {
-      background: url(#{$assets-url}icns_sprite.png) no-repeat -254px 0;
+      @include sprite(-254px, 0);
       display: block;
       height: 32px;
       text-indent: -9999em;
@@ -420,7 +441,7 @@ article, aside, footer, header, main, nav, section {
   }
 
   &__icon {
-    background: url(#{$assets-url}icns_sprite.png) no-repeat;
+    @include sprite;
     display: block;
     height: 32px;
     text-indent: -9999em;
@@ -474,13 +495,15 @@ article, aside, footer, header, main, nav, section {
 
   &__item {
     margin-bottom: emify(40, $text__font-size--max);
-
-    @media all and (max-width: #{$width--main}) {
+    
+    @media screen and (max-width: #{$width--main}) {
       @include grid__cell(3);
     }
 
-    @media all and (min-width: #{$width--main + 1}) {
-      @include grid__cell(5, emify(30, $text__font-size--max));
+    @at-root .gallery__grid:not(.grid--three-columns) & {
+      @media screen and (min-width: #{$width--main + 1}) {
+        @include grid__cell(5, emify(30, $text__font-size--max));
+      }
     }
   }
 
@@ -567,9 +590,7 @@ article, aside, footer, header, main, nav, section {
 
 .owl-carousel .owl-nav .owl-next,
 .owl-carousel .owl-nav .owl-prev {
-  // temp
-  background: url(#{$assets-url}icns_sprite.png) no-repeat;
-  // --- end temp
+  @include sprite;
   cursor: pointer;
   height: 64px;
   margin-top: -32px;
