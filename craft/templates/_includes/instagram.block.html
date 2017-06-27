@@ -13,7 +13,7 @@
         {% if heading is defined %}
         <h2 class="gallery__heading heading heading--beta">{{ heading }}</h2>
         {% endif %}
-        <div class="grid gallery__grid">
+        <div class="grid gallery__grid gallery__grid--instagram">
         {% for image in craft.instagramfeed.getFeed(10) %}
             <div class="gallery__item grid__cell">
                 <a href="{{ image.link }}" target="_blank" class="gallery__link">
