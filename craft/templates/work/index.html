@@ -43,9 +43,8 @@
             <h2 class="gallery__heading heading heading--beta">{{ gallery.heading }}</h2>
             <div class="gallery__grid grid grid--three-columns">
                 {% for galleryItem in gallery.image %}
-                {% do galleryItem.setTransform({ width: 342, height: 256 }) %}
                 <div class="gallery__item grid__cell">
-                    <img src="{{ galleryItem.url }}" alt="{{ galleryItem.title }}" />
+                    <img src="{{ galleryItem.url({ width: 342, height: 256 }) }}" srcset="{{ galleryItem.url }} 2x" alt="{{ galleryItem.title }}" />
                 </div>
                 {% endfor %}
             </div>

@@ -18,7 +18,7 @@
         {% set hero = entry.heroImage.first() %}
         {% if hero %}
         <div class="header__image layout-block layout-block--full">
-            <img src="{{ hero.url() }}" alt="{{ entry.title }}" />
+            <img src="{{ hero.url }}" alt="{{ entry.title }}" />
         </div>
         {% endif %}
     </header>
@@ -37,7 +37,7 @@
             {% if isFlowRight == false %}
             <div class="about-trivia__image grid__cell grid__cell--one-third">
                 {% if triviaImage %}
-                <img src="{{ triviaImage.url() }}" alt="{{ trivia.triviaHeading }}" />
+                <img src="{{ triviaImage.url }}" alt="{{ trivia.triviaHeading }}" />
                 {% endif %}
             </div>
             {% endif %}
@@ -48,7 +48,7 @@
             {% if isFlowRight %}
             <div class="about-trivia__image grid__cell grid__cell--one-third">
                 {% if triviaImage %}
-                <img src="{{ triviaImage.url() }}" alt="{{ trivia.triviaHeading }}" />
+                <img src="{{ triviaImage.url }}" alt="{{ trivia.triviaHeading }}" />
                 {% endif %}
             </div>
             {% endif %}
