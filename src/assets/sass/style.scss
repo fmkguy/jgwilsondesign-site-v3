@@ -87,6 +87,10 @@ $assets-url: "../img/";
   margin-bottom: emify(160, $text__font-size--max);
 }
 
+@mixin layout__new-section--padding-top-only {
+  padding-top: emify(160, $text__font-size--max);
+}
+
 @mixin text__font-size($target, $context, $line-height: $target) {
   font-size: emify($target, $context);
   line-height: emify($line-height, $target);
@@ -227,7 +231,7 @@ article, aside, footer, header, main, nav, section {
     vertical-align: middle;
     width: emify(80, $text__font-size--max);
 
-    @media screen and (max-width: #{$width--main}) {
+    @media screen and (max-width: #{$mq--small}px) {
       float: left;
       height: 32px;
       vertical-align: initial;
@@ -245,7 +249,7 @@ article, aside, footer, header, main, nav, section {
       display: none;
     }
 
-    @media screen and (max-width: #{$width--main}) {
+    @media screen and (max-width: #{$mq--small}px) {
       line-height: 32px;
     }
   }
@@ -259,7 +263,7 @@ article, aside, footer, header, main, nav, section {
   position: relative;
   z-index: 1;
 
-  @media screen and (max-width: #{$width--main}) {
+  @media screen and (max-width: #{$mq--small}px) {
     display: none;
   }
 
@@ -275,7 +279,7 @@ article, aside, footer, header, main, nav, section {
       width: 32px;
     }
 
-    @media screen and (min-width: #{$width--main + 1}) {
+    @media screen and (min-width: #{$mq--small + 1}px) {
       display: none;
     }
   }
@@ -380,6 +384,10 @@ article, aside, footer, header, main, nav, section {
 // ====================================================
 .layout-footer {
   background: url(#{$assets-url}bg_footer.jpg) no-repeat 100% 100%;
+
+  @media screen and (max-width: #{$mq--small}px) {
+    background-position: 88% 100%;
+  }
 }
 
 .contact {
@@ -495,12 +503,17 @@ article, aside, footer, header, main, nav, section {
 
   &__item {
     margin-bottom: emify(40, $text__font-size--max);
-    
-    @media screen and (max-width: #{$width--main}) {
-      @include grid__cell(3);
+    width: 100%;
+
+    & img {
+      margin: 0 auto;
     }
 
-    @at-root .gallery__grid:not(.grid--three-columns) & {
+    @at-root .gallery__grid--instagram & {
+      @media screen and (max-width: #{$width--main}) {
+        @include grid__cell(3);
+      }
+
       @media screen and (min-width: #{$width--main + 1}) {
         @include grid__cell(5, emify(30, $text__font-size--max));
       }

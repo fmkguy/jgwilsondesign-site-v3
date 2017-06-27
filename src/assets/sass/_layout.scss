@@ -64,7 +64,7 @@
 }
 
 .layout-footer {
-  @include layout__new-section--margin-top-only;
+  @include layout__new-section--padding-top-only;
   text-align: left;
 }
 
