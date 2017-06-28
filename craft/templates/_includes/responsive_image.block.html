@@ -1,0 +1,37 @@
+{#
+ # ResponsiveImage Block
+ # ---------------------
+ #
+ #}
+
+{% if img is defined %}
+    {% set image = img.first() %}
+{% endif %}
+
+{% if image %}
+    {% set alt = (alt is defined) ? alt : image.title %}
+    {% set srcset = null %}
+
+    <picture{% if css is defined %} class="{{ css }}"{% endif %}>
+        {% if (img|length > 1) %}
+            {% for i, altImage in img %}
+
+            {% set size = altImage.responsiveImageSize.value %}
+
+            {# if img.first(), then skip #}
+            {% if i != 0 %}
+
+                {% if (size == '1x') or (size == '2x') %}
+                
+                    {% set srcset = "#{altImage.url} #{size}, " ~ srcset %}
+
+                {% else %}
+                <source media="(max-width: {{ size }}px)" srcset="{{ altImage.url }} 1x" />
+                {% endif %}
+
+            {% endif %}
+            {% endfor %}
+        {% endif %}
+        <img src="{{ image.url }}"{% if srcset and srcset != '' %} srcset="{{ srcset }}"{% endif %} alt="{{ alt }}" />
+    </picture>
+{% endif %}

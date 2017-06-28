@@ -14,10 +14,7 @@
 
     <header class="header">
         <div class="header__image layout-block layout-block--full">
-            {% set hero = entry.heroImage.first() %}
-            {% if hero %}
-            <img src="{{ hero.url }}" alt="{{ entry.title }}" />
-            {% endif %}
+            {% include "_includes/responsive_image.block.html" with { img: entry.heroImage, alt: entry.title } %}
         </div>
     </header>
     
@@ -27,7 +24,7 @@
             <div class="project-details__client">
                 {% set logo = details.clientLogo.first() %}
                 {% if logo %}
-                <img class="project-details__client-logo" src="{{ logo.url }}" alt="{{ details.clientName }} Logo">
+                {% include "_includes/responsive_image.block.html" with { img: details.clientLogo, alt: details.clientName ~ " Logo", css: "project-details__client-logo" } %}
                 {% else %}
                 <h2 class="project-details__client-name">{{ details.clientName }}</h2>
                 {% endif %}

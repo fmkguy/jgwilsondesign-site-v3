@@ -14,13 +14,13 @@
 		<div class="helper--vertical-align">
 			<h1 class="hero__heading heading heading--hero">{{ entry.title }}</h1>
 			<div class="hero__subheading">{{ entry.subheading }}</div>
-		</div>
-		<div class="hero__scroll-notice">
-			<span class="hero__scroll-notice-icon"></span> Scroll
+			<a href="#primary" class="hero__scroll-notice">
+				<span class="hero__scroll-notice-icon"></span> Scroll
+			</a>
 		</div>
 	</header>
 
-	<div class="project-links grid layout-block layout-block--full">
+	<div id="primary" class="project-links grid layout-block layout-block--full">
 		<a href="{{ url('web') }}" class="project-links__link project-links__web-link grid__cell">
 			<span class="project-links__inner-wrap">
 				<span class="helper--vertical-align">

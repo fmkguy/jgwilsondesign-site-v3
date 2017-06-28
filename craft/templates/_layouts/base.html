@@ -133,7 +133,15 @@
     </footer>
 <!-- end layout-footer -->
 
-    <script type="text/javascript" src="{{ siteUrl }}assets/js/jquery-3.2.1.slim.min.js"></script>
+    <script src="//code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        if(!(window.jQuery)) {
+            var s = document.createElement('script');
+            s.setAttribute('src', '{{ siteUrl }}assets/js/jquery-3.2.1.min.js');
+            s.setAttribute('type', 'text/javascript');
+            document.getElementsByTagName('head')[0].appendChild(s);
+        }
+    </script>
     <script type="text/javascript" src="{{ siteUrl }}assets/js/owl.carousel.min.js"></script>
     <script type="text/javascript" src="{{ siteUrl }}assets/js/site.js"></script>
 

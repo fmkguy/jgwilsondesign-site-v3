@@ -167,16 +167,16 @@ body {
   text-rendering: optimizeLegibility;
 
   @media screen and (max-width: #{$mq--medium}px) {
-    background-size: 1100px;
-    background-position: center -#{emify(500, $text__font-size--max)};
+    background-position: center -#{emify(360, $text__font-size--max)};
+    background-size: #{$mq--medium}px;
   }
 
   @media screen and (max-width: #{$width--main}) {
-    background-position: center -#{emify(650, $text__font-size--max)};
+    background-size: $width--main;
   }
 }
 
-article, aside, footer, header, main, nav, section {
+article, aside, footer, header, main, nav, section, picture {
   display: block;
 }
 
@@ -192,7 +192,7 @@ article, aside, footer, header, main, nav, section {
   border-bottom: 1px dotted $color--gray;
   max-width: $width--main;
   margin: emify(64, $text__font-size--max) auto;
-  width: 100%;
+  width: calc(100% - 2rem);
 }
 
 // helpers
@@ -271,7 +271,7 @@ article, aside, footer, header, main, nav, section {
     left: 0;
     margin: 0;
     overflow-y: auto;
-    padding: emify(32, $text__font-size--max);
+    padding: emify(32, $text__font-size--max) 1rem;
     position: fixed;
     text-align: center;
     top: 0;
@@ -293,7 +293,7 @@ article, aside, footer, header, main, nav, section {
     }
 
     @at-root .menu & {
-      transform: translateX(emify(32, $text__font-size--max));
+      transform: translateX(1rem);
 
       &-icon {
         background-position: -286px 0;

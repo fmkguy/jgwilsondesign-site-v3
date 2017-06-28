@@ -2,10 +2,14 @@
 // H O M E  C O N T E N T
 // ====================================================
 .home {
-  background-position: center -400px;
+  background-position: center -#{emify(400, $text__font-size--max)};
 
   @media screen and (max-width: #{$mq--medium}px) {
-    background-position: center -240px;
+    background-position: center -#{emify(240, $text__font-size--max)};
+  }
+
+  @media screen and (max-width: #{$mq--small}px) {
+    background-position: center -#{emify(160, $text__font-size--max)};
   }
 }
 
@@ -56,8 +60,9 @@
   }
 
   &__scroll-notice {
-    bottom: emify(32, 12.8);
+    bottom: -#{emify(64, 12.8)};
     @include text--small-text;
+    font-weight: bold;
     line-height: 32px;
     margin-left: 50%;
     opacity: 0.75;
