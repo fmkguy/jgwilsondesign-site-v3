@@ -19,10 +19,15 @@ $(document).ready(function(){
 
     $('a.menu__trigger').on('click', function(e) {
         e.preventDefault();
-
         $('nav.menu').toggleClass('state--visible');
+    });
 
-        return false;
+    $('a.hero__scroll-notice').on('click', function(e) {
+        e.preventDefault();
+        var targetRef = this.getAttribute('href');
+        $('html, body').animate({
+            scrollTop: $(targetRef).offset().top
+        }, 300);
     });
 
 });

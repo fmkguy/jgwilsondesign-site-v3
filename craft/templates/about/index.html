@@ -15,12 +15,9 @@
         <div class="layout-block">
             <h1 class="header__heading heading heading--alpha">{{ entry.title }}</h1>
         </div>
-        {% set hero = entry.heroImage.first() %}
-        {% if hero %}
         <div class="header__image layout-block layout-block--full">
-            <img src="{{ hero.url }}" alt="{{ entry.title }}" />
+            {% include "_includes/responsive_image.block.html" with { img: entry.heroImage, alt: entry.title } %}
         </div>
-        {% endif %}
     </header>
     
     <div class="layout-block">
@@ -32,13 +29,10 @@
     <div class="about-trivia layout-block">
     {% for i, trivia in entry.aboutTrivia %}
         {% set isFlowRight = (i) is odd ? true : false %}
-        {% set triviaImage = trivia.triviaImage.first() %}
         <div class="about-trivia__item grid{% if isFlowRight %} grid--flow-right{% endif %}">
             {% if isFlowRight == false %}
             <div class="about-trivia__image grid__cell grid__cell--one-third">
-                {% if triviaImage %}
-                <img src="{{ triviaImage.url }}" alt="{{ trivia.triviaHeading }}" />
-                {% endif %}
+                {% include "_includes/responsive_image.block.html" with { img: trivia.triviaImage, alt: trivia.triviaHeading } %}
             </div>
             {% endif %}
             <div class="about-trivia__content grid__cell grid__cell--flex">
@@ -47,9 +41,7 @@
             </div>
             {% if isFlowRight %}
             <div class="about-trivia__image grid__cell grid__cell--one-third">
-                {% if triviaImage %}
-                <img src="{{ triviaImage.url }}" alt="{{ trivia.triviaHeading }}" />
-                {% endif %}
+                {% include "_includes/responsive_image.block.html" with { img: trivia.triviaImage, alt: trivia.triviaHeading } %}
             </div>
             {% endif %}
         </div>
