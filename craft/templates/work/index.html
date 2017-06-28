@@ -44,7 +44,7 @@
             <div class="gallery__grid grid grid--three-columns">
                 {% for galleryItem in gallery.image %}
                 <div class="gallery__item grid__cell">
-                    <img src="{{ galleryItem.url({ width: 342, height: 256 }) }}" srcset="{{ galleryItem.url }} 2x" alt="{{ galleryItem.title }}" />
+                    <img src="{{ galleryItem.url({ width: 342, height: 256 }) }}" srcset="{{ galleryItem.url({ width: 684, height: 512 }) }} 2x" alt="{{ galleryItem.title }}" />
                 </div>
                 {% endfor %}
             </div>

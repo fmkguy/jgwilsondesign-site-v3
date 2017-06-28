@@ -118,7 +118,7 @@ $assets-url: "../img/";
 
 @mixin sprite($posX: 0, $posY: 0) {
   background: url(#{$assets-url}icns_sprite.png) no-repeat $posX $posY;
-  background-size: 286px 64px;
+  background-size: 318px 96px;
 
   @media only screen and (-webkit-min-device-pixel-ratio: 2), 
   only screen and (min-device-pixel-ratio: 2) {
@@ -261,15 +261,28 @@ article, aside, footer, header, main, nav, section {
   margin-right: 1rem;
   margin-top: emify(24, $text__font-size--max);
   position: relative;
-  z-index: 1;
+  z-index: 10;
 
   @media screen and (max-width: #{$mq--small}px) {
+    background: $color--green;
+    color: $color--white;
     display: none;
+    height: 100%;
+    left: 0;
+    margin: 0;
+    overflow-y: auto;
+    padding: emify(32, $text__font-size--max);
+    position: fixed;
+    text-align: center;
+    top: 0;
+    width: 100%;
   }
 
   &__trigger {
     float: right;
     margin-right: 1rem;
+    position: relative;
+    z-index: 10;
 
     &-icon {
       @include sprite(-254px, 0);
@@ -277,6 +290,14 @@ article, aside, footer, header, main, nav, section {
       height: 32px;
       text-indent: -9999em;
       width: 32px;
+    }
+
+    @at-root .menu & {
+      transform: translateX(emify(32, $text__font-size--max));
+
+      &-icon {
+        background-position: -286px 0;
+      }
     }
 
     @media screen and (min-width: #{$mq--small + 1}px) {
@@ -306,6 +327,22 @@ article, aside, footer, header, main, nav, section {
       opacity: 1;
       width: emify(39, 14);
     }
+
+    @media screen and (max-width: #{$mq--small}px) {
+      color: $color--white;
+      display: block;
+      @include text--heading;
+      @include text__font-size(52, $text__font-size--max, 52);
+      margin: emify(72,52) 0 0 0;
+      text-align: center;
+
+      &:after, &:hover:after {
+        background: $color--white;
+        height: 3px;
+        opacity: 1;
+        width: emify(80,52);
+      }
+    }
   }
 
   &__item-icon {
@@ -320,38 +357,86 @@ article, aside, footer, header, main, nav, section {
     width: emify(64, $text__font-size--max);
   }
 
-  &__submenu {
-    // temp
-    display: none;
-    // --- end temp
-    float: right;
-    margin: 0 1rem;
+  // &__submenu {
+  //   // temp
+  //   display: none;
+  //   // --- end temp
+  //   float: right;
+  //   margin: 0 1rem;
+  //
+  //   &-container {
+  //     background: linear-gradient(to bottom, rgba(255,255,255,1) 1%,rgba(255,255,255,1) 25%,rgba(255,255,255,0) 100%); // W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+
+  //     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#00ffffff',GradientType=0 ); // IE6-9
+  //     // temp
+  //     // background: $color--orange;
+  //     // --- end temp
+  //     font-family: $text__font-family--sans-serif;
+  //     font-weight: bold;
+  //     padding: emify(96,20) 0;
+  //     position: absolute;
+  //     text-transform: uppercase;
+  //     transform: translateY(-112px);
+  //     // transform: translateY(0);
+  //     margin-top: -#{emify(112,20)};
+  //     width: 100%;
+  //     z-index: 0;
+  //   }
+  //
+  //   &-link {
+  //     // background: $color--orange-light;
+  //     float: left;
+  //     padding: 1.5rem;
+  //   }
+  // }
 
-    &-container {
-      background: linear-gradient(to bottom, rgba(255,255,255,1) 1%,rgba(255,255,255,1) 25%,rgba(255,255,255,0) 100%); // W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+
-      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#00ffffff',GradientType=0 ); // IE6-9
-      // temp
-      // background: $color--orange;
-      // --- end temp
-      font-family: $text__font-family--sans-serif;
-      font-weight: bold;
-      padding: emify(96,20) 0;
-      position: absolute;
-      text-transform: uppercase;
-      transform: translateY(-112px);
-      // transform: translateY(0);
-      margin-top: -#{emify(112,20)};
-      width: 100%;
-      z-index: 0;
+  &-mobile {
+    &__links {
+      border-top: 1px dotted $color--white;
+      display: none;
+      margin-top: emify(120, $text__font-size--max);
+      padding-top: emify(80, $text__font-size--max);
+
+      @media screen and (max-width: #{$mq--small}px) {
+        display: block;
+      }
     }
 
-    &-link {
-      // background: $color--orange-light;
-      float: left;
-      padding: 1.5rem;
+    &__link {
+      color: $color--white;
+      display: inline-block;
+      margin: 0 emify(8, $text__font-size--max);
+
+      &-icon {
+        @include sprite;
+        display: block;
+        height: 32px;
+        text-indent: -9999em;
+        width: 32px;
+
+        &--instagram {
+          background-position: -94px -64px;
+        }
+        &--twitter {
+          background-position: -126px -64px;
+        }
+        &--dribbble {
+          background-position: -222px -64px;
+        }
+        &--github {
+          background-position: -158px -64px;
+        }
+        &--codepen {
+          background-position: -190px -64px;
+        }
+      }
     }
   }
 }
+
+.state--visible {
+  display: block;
+}
+
 // temp
 .layout-content {
   // Testing changes to menu

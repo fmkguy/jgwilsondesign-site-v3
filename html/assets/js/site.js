@@ -7,14 +7,22 @@ $(document).ready(function(){
         nav: true,
         responsive: {
             0: {
-                autoHeight: true,
+                // autoHeight: true,
                 touchDrag: true
             },
             768: {
-                autoHeight: false,
+                // autoHeight: false,
                 touchDrag: false
             }
         }
+    });
+
+    $('a.menu__trigger').on('click', function(e) {
+        e.preventDefault();
+
+        $('nav.menu').toggleClass('state--visible');
+
+        return false;
     });
 
 });
