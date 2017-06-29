@@ -84,7 +84,7 @@
 
     
     {% if type == 'image' and imageCount > 1 %}    
-        <div class="grid {{ gridCountClass[imageCount-1] }} layout-block{% if block.layout != 'block' %} layout-block--{{ block.layout }}{% endif %}{{ newSectionClass }}">
+        <div class="article-grid grid {{ gridCountClass[imageCount-1] }} layout-block{% if block.layout != 'block' %} layout-block--{{ block.layout }}{% endif %}{{ newSectionClass }}">
     {% elseif type == 'image' and imageCount == 1 %}
         <figure class="figure{% if closedPrevBlock or block.isNewSection != 'none' %} layout-block{% if block.layout != 'block' %} layout-block--{{ block.layout }}{% endif %}{{ newSectionClass }}{% endif %}">
     {% elseif type in ['text', 'iconList'] and closedPrevBlock %}
