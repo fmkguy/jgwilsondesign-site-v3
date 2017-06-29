@@ -25,8 +25,14 @@
 			<span class="project-links__inner-wrap">
 				<span class="helper--vertical-align">
 					<span class="project-links__image-wrap">
-						<img class="project-links__image" src="{{ siteUrl }}assets/img/bg_webdev.png" alt="Computer and laptop" />
-						<img class="project-links__hover-image" src="{{ siteUrl }}assets/img/bg_webdev-hover.png" alt="Hover sparkles!" />
+						<img class="project-links__image"
+							 src="{{ siteUrl }}assets/img/bg_webdev.png"
+							 srcset="{{ siteUrl }}assets/img/bg_webdev@2x.png 2x"
+							 alt="Computer and laptop" />
+						<img class="project-links__hover-image"
+							 src="{{ siteUrl }}assets/img/bg_webdev-hover.png"
+							 srcset="{{ siteUrl }}assets/img/bg_webdev-hover@2x.png"
+							 alt="Hover sparkles!" />
 					</span>
 					<span class="project-links__content">View my web development work.</span>
 				</span>
@@ -35,7 +41,19 @@
 		</a>
 		<a href="{{ url('art') }}" class="project-links__link project-links__art-link grid__cell">
 			<span class="project-links__inner-wrap">
-				<span class="project-links__content helper--vertical-align">Browse my illustration projects.</span>
+				<span class="helper--vertical-align">
+					<span class="project-links__image-wrap">
+						<img class="project-links__image"
+							 src="{{ siteUrl }}assets/img/bg_art.png"
+							 srcset="{{ siteUrl }}assets/img/bg_art@2x.png 2x"
+							 alt="Wacom tablet and chemex coffee! YUM!" />
+						<img class="project-links__hover-image"
+							 src="{{ siteUrl }}assets/img/bg_art-hover.png"
+							 srcset="{{ siteUrl }}assets/img/bg_art-hover@2x.png"
+							 alt="Hover sparkles and steam!" />
+					</span>
+					<span class="project-links__content">Browse my illustration projects.</span>
+				</span>
 			</span>
 			<img class="project-links__background-image" src="{{ craft.config.environmentVariables.assetsBaseUrl }}/img/bg_illustration-link.jpg" alt="Illustration" />
 		</a>
