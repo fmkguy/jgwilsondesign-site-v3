@@ -104,16 +104,19 @@
   }
 
   &__icon {
-    display: block;
+    // TODO: Once the icons are finished, show them
+    // display: block;
+    display: none;
     height: emify(36, $text__font-size);
     position: absolute;
     width: emify(36, $text__font-size);
   }
   &__label {
     display: block;
-    // line-height: emify(24, 16);
+    /* line-height: emify(24, 16); */
     min-height: emify(36, $text__font-size);
-    padding-left: emify(52, $text__font-size);
+    // TODO: Once the icons are finished, re-add the padding
+    // padding-left: emify(52, $text__font-size);
 
     & p {
       margin: 0;

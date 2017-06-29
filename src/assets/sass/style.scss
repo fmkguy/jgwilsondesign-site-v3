@@ -166,9 +166,9 @@ body {
   text-align: center;
   text-rendering: optimizeLegibility;
 
-  @media screen and (max-width: #{$mq--medium}px) {
+  @media screen and (max-width: #{$width--wide}) {
     background-position: center -#{emify(360, $text__font-size--max)};
-    background-size: #{$mq--medium}px;
+    background-size: #{$width--wide};
   }
 
   @media screen and (max-width: #{$width--main}) {
@@ -180,7 +180,7 @@ article, aside, footer, header, main, nav, section, picture {
   display: block;
 }
 
-@media screen and (max-width: #{$mq--medium}px) {
+@media screen and (max-width: #{$width--wide}) {
   :root,
   body {
     font-size: calc( #{$text__font-size}px + (#{$text__font-size--max} - #{$text__font-size}) * (100vw - #{$mq--small}px) / (#{$mq--medium} - #{$mq--small}));
@@ -595,11 +595,14 @@ article, aside, footer, header, main, nav, section, picture {
     }
 
     @at-root .gallery__grid--instagram & {
-      @media screen and (max-width: #{$width--main}) {
+      @media screen and (max-width: #{$mq--small}px) {
         @include grid__cell(3);
+        &:nth-of-type(10) {
+          display: none;
+        }
       }
 
-      @media screen and (min-width: #{$width--main + 1}) {
+      @media screen and (min-width: #{$mq--small + 1}px) {
         @include grid__cell(5, emify(30, $text__font-size--max));
       }
     }
