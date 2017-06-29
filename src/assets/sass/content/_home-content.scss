@@ -133,6 +133,9 @@
     }
 
     &:hover {
+      .project-links__image {
+        opacity: 0;
+      }
       .project-links__hover-image {
         opacity: 1;
       }
@@ -155,6 +158,7 @@
   }
 
   &__image {
+    opacity: 1;
     position: absolute;
   }
 
