@@ -75,7 +75,9 @@
         <blockquote class="blockquote">
             <div class="blockquote__quote">{{ quote.quote }}</div>
             <footer class="blockquote__attribution">
-                <strong class="blockquote__author">&mdash;&thinsp;{{ quote.cite }},</strong>{% if quote.role %}<span class="blockquote__author-role"> {{ quote.role }}</span>{% endif %}
+                <strong class="blockquote__author">&mdash;&thinsp;{{ quote.cite }},</strong>
+                {% if quote.role %}<span class="blockquote__author-role"> {{ quote.role }}</span>{% endif %}
+                <span class="blockquote__author-company"><em>{{ quote.company }}</em></span>
             </footer>
         </blockquote>
         {% endfor %}

@@ -78,8 +78,16 @@ h3 { @extend .heading--gamma; }
   }
   &__attribution {
     font-family: $text__font-family--sans-serif;
-    @include text__font-size($text__font-size, $text__font-size--max, $text__font-size);
+    @include text__font-size($text__font-size, $text__font-size--max, 24);
     margin-left: 2em;
+  }
+  &__author {
+    &-company {
+      display: block;
+      font-size: 0.9em;
+      margin-left: 1.25em;
+      opacity: 0.7;
+    }
   }
 }
 // --- end Typography
