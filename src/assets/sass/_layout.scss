@@ -85,6 +85,7 @@
   @include clearfix;
   &__cell {
     float: left;
+    width: 100%;
 
     @at-root .grid--two-columns #{&} {
       @media screen and (min-width: #{$mq--small + 1}px) {

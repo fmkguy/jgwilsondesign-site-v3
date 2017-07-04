@@ -118,7 +118,7 @@ $assets-url: "../img/";
 
 @mixin sprite($posX: 0, $posY: 0) {
   background: url(#{$assets-url}icns_sprite.png) no-repeat $posX $posY;
-  background-size: 318px 96px;
+  background-size: 398px 96px;
 
   @media only screen and (-webkit-min-device-pixel-ratio: 2), 
   only screen and (min-device-pixel-ratio: 2) {
@@ -492,8 +492,8 @@ article, aside, footer, header, main, nav, section, picture {
       font-family: $text__font-family--sans-serif;
       font-size: emify(14, $text__font-size--max);
       font-weight: 700;
-      height: emify(64, 14);
-      line-height: emify(56, 14);
+      height: 64px;
+      line-height: 56px;
       position: relative;
       text-align: center;
       text-transform: uppercase;
@@ -502,18 +502,39 @@ article, aside, footer, header, main, nav, section, picture {
         background-color: $color--orange-light;
         color: $color--white;
       }
+
+      @media screen and (max-width: #{$mq--small}px) {
+        margin-bottom: 1rem;
+      }
     }
 
     &__icon {
       // temp
       // background: $color--gray-light;
-      border: 1px solid lighten($color--orange-light, 10%);
-      border-radius: 50%;
+      // border: 1px solid lighten($color--orange-light, 10%);
+      // border-radius: 50%;
+      // end temp
+      @include sprite;
       display: inline-block;
-      height: emify(40, 14);
-      width: emify(40, 14);
+      height: 40px;
+      width: 40px;
       vertical-align: middle;
-      // --- end temp
+
+      &--linkedin {
+        background-position: -318px 0;
+
+        @at-root .contact-methods__btn:hover & {
+          background-position: -318px -40px;
+        }
+      }
+
+      &--pdf {
+        background-position: -358px 0;
+
+        @at-root .contact-methods__btn:hover & {
+          background-position: -358px -40px;
+        }
+      }
     }
 
     &__label {
