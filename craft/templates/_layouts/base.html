@@ -12,7 +12,12 @@
 
     <title>{% if title is defined %}{{ title }} &mdash; {{ siteName }}{% else %}I'm Wilson: Portland, Oregon-based front-end developer and artist.{% endif %}</title>
 
-    <link rel="icon" type="image/x-icon" href="{{ siteUrl }}assets/img/favicon.ico" />
+    <link rel="shortcut icon" type="image/x-icon" href="{{ siteUrl }}assets/img/favicon.ico" />
+    <link rel="apple-touch-icon-precomposed" sizes="57x57" href="{{ siteUrl }}assets/img/favicon_iPhone.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{ siteUrl }}assets/img/favicon_iPhone.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{ siteUrl }}assets/img/favicon_iPad.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ siteUrl }}assets/img/favicon_iPad.png" />
+
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Passion+One:700" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700" />
@@ -23,6 +28,7 @@
     <!-- S O C I A L -->
     <link rel="author" href="https://twitter.com/fmkguy" />
     <link rel="canonical" href="{{ craft.request.getUrl() }}" />
+    <meta property="og:locale" content="en_US" />
 	<meta property="og:type" content="website" />
     <meta property="og:url" content="{{ craft.request.getUrl() }}" />
     <meta property="og:site_name" content="jgwilsondesign" />
@@ -110,7 +116,7 @@
                     <span class="contact-methods__icon contact-methods__icon--linkedin"></span>
                     <span class="contact-methods__label">View my LinkedIn profile.</span>
                 </a>
-                <a href="http://jgwilsondesign.com/resume.pdf" target="_blank" class="btn contact-methods__btn grid__cell">
+                <a href="http://jgwilsondesign.com/resume_v2017.pdf" target="_blank" class="btn contact-methods__btn grid__cell">
                     <span class="contact-methods__icon contact-methods__icon--pdf"></span>
                     <span class="contact-methods__label">Download my resume.</span>
                 </a>
