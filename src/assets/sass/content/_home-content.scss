@@ -140,6 +140,10 @@
         opacity: 1;
       }
     }
+
+    @media screen and (min-width: #{$mq--small}px) and (max-width: #{$mq--medium}px) {
+      font-size: 0.8em;
+    }
   }
 
   &__inner-wrap {
