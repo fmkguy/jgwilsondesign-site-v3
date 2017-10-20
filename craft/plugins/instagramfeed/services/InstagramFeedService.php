@@ -31,7 +31,8 @@ class InstagramFeedService extends BaseApplicationComponent
 		
 		foreach ($result->data as $row) {
 			$images[] = array(
-				'url' => $row->images->standard_resolution->url,
+				// 'url' => $row->images->standard_resolution->url,
+				'url' => str_replace('s150x150/', 's320x320/', $row->images->thumbnail->url),
 				'link' => $row->link,
 				'likes' => $row->likes->count,
 				'comments' => $row->comments->count
